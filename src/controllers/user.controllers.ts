@@ -12,7 +12,7 @@ import { UserType } from '../types/user.types'
 const createUser = async (req: Request, res: Response): Promise<void> => {
   try {
     const data = req.body as UserType
-    const newUser = createUserServices(data)
+    const newUser = await createUserServices(data)
     await newUser.save()
     res.status(201).json(newUser)
   } catch (err) {
