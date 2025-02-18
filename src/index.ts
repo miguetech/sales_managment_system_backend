@@ -4,6 +4,7 @@ import { userRoutes } from './routes/user.routes'
 import mongoose from 'mongoose'
 import { productRoutes } from './routes/product.routes'
 import { saleRoutes } from './routes/sale.routes'
+import { authRoutes } from './routes/auth.routes'
 // Cargar variables de entorno
 dotenv.config()
 
@@ -26,6 +27,7 @@ app.use(express.json())
 app.use('/users', userRoutes)
 app.use('/product', productRoutes)
 app.use('/sale', saleRoutes)
+app.use('/', authRoutes)
 
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`)

@@ -27,6 +27,7 @@ const createUser = async (req: Request, res: Response): Promise<void> => {
 // Obtener todos los usuarios
 const getUsers = async (req: Request, res: Response): Promise<void> => {
   try {
+    // await authenticateToken(req, res, next)
     const users = await getUsersServices()
     console.log('Esta es la obtención de todos los usuarios', users)
     res.status(200).json(users)
@@ -43,6 +44,7 @@ const getUsers = async (req: Request, res: Response): Promise<void> => {
 const getUserById = async (req: Request, res: Response): Promise<void> => {
   try {
     const { id } = req.body
+
     const findUser = await getUserByIdServices(id)
     res.status(201).json(findUser)
   } catch (err: unknown) {

@@ -1,6 +1,6 @@
 import { User } from '../models/user.models'
 import type { UserType } from '../types/user.types'
-import { hashPassword } from '../utils/password'
+import { hashPassword } from '../utils/hashPassword'
 const createUserServices = async (data: UserType) => {
   const newData = data
   newData.password = await hashPassword(data.password)
