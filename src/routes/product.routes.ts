@@ -7,20 +7,17 @@ import {
   deleteProduct,
   updateProduct,
 } from '../controllers/product.controllers'
+import { Role } from '../enum/const'
+import { authToken, authRole } from '../middlewares/auth'
 
-// Ruta para crear un usuario
-router.post('/createProduct', createProduct)
+router.post('/createProduct', authToken, authRole([Role.ADMIN, Role.SALESPERSON]), createProduct)
 
-// Ruta para obtener todos los usuarios
-router.get('/getProducts', getProducts)
+router.get('/getProducts', authToken, authRole([Role.ADMIN, Role.SALESPERSON]), getProducts)
 
-// Ruta para obtener todos los usuarios
-router.get('/getProductById', getProductById)
+router.get('/getProductById', authToken, authRole([Role.ADMIN, Role.SALESPERSON]), getProductById)
 
-// Ruta para obtener todos los usuarios
-router.put('/updateProduct', updateProduct)
+router.put('/updateProduct', authToken, authRole([Role.ADMIN]), updateProduct)
 
-// Ruta para obtener todos los usuarios
-router.delete('/deleteProduct', deleteProduct)
+router.delete('/deleteProduct', authToken, authRole([Role.ADMIN]), deleteProduct)
 
 export const productRoutes = router

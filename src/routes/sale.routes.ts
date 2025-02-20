@@ -1,20 +1,17 @@
 import express from 'express'
 const router = express.Router()
 import { createSale, getSales, getSaleById, deleteSale, updateSale } from '../controllers/sale.controllers'
+import { authRole, authToken } from '../middlewares/auth'
+import { Role } from '../enum/const'
 
-// Ruta para crear un usuario
-router.post('/createSale', createSale)
+router.post('/createSale', authToken, authRole([Role.ADMIN, Role.SALESPERSON]), createSale)
 
-// Ruta para obtener todos los usuarios
-router.get('/getSales', getSales)
+router.get('/getSales', authToken, authRole([Role.ADMIN, Role.SALESPERSON]), getSales)
 
-// Ruta para obtener todos los usuarios
-router.get('/getSaleById', getSaleById)
+router.get('/getSaleById', authToken, authRole([Role.ADMIN, Role.SALESPERSON]), getSaleById)
 
-// Ruta para obtener todos los usuarios
-router.put('/updateSale', updateSale)
+router.put('/updateSale', authToken, authRole([Role.ADMIN]), updateSale)
 
-// Ruta para obtener todos los usuarios
-router.delete('/deleteSale', deleteSale)
+router.delete('/deleteSale', authToken, authRole([Role.ADMIN]), deleteSale)
 
 export const saleRoutes = router
